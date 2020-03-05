@@ -1,0 +1,37 @@
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { LocalizationContext } from "../providers/LocalizationProvider";
+
+import { SettingsParamList } from "./params/SettingsParamList";
+import SettingsScreen from "../screens/SettingsScreen";
+import { MainHeader } from "../components/MainHeader";
+
+interface SettingsStackProps {}
+
+const Stack = createStackNavigator<SettingsParamList>();
+
+export const SettingsStack: React.FC<SettingsStackProps> = ({}) => {
+  const { t } = React.useContext(LocalizationContext);
+
+  return (
+    <Stack.Navigator
+      initialRouteName="Settings"
+      headerMode="float"
+      screenOptions={{
+        header: ({ scene, previous, navigation }) => (
+          <MainHeader
+            scene={scene}
+            previous={previous}
+            navigation={navigation}
+          />
+        )
+      }}
+    >
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: t("Settings") }}
+      />
+    </Stack.Navigator>
+  );
+};
