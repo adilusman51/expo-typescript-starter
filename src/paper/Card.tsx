@@ -22,3 +22,5 @@ export const Card: React.FC<CardProps> = ({
     </PaperCard>
   );
 };
+
+export default Card;
