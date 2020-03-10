@@ -1,19 +1,71 @@
-import React, { useContext } from "react";
-import { View, Text } from "react-native";
-import { Button } from "react-native-paper";
+import React, { useContext, useState } from "react";
+import { View, Alert } from "react-native";
+
 import { AuthContext } from "../../providers/AuthProvider";
 import { AuthNavProps } from "../../navigation/params/AuthParamList";
+import { TextInput, Container, Button, Card } from "../../paper";
+import setInput from "../../utils/InputHelper";
+import { Margin } from "../../components/Margin";
 
 const SignInScreen = ({ navigation }: AuthNavProps<"SignIn">) => {
   const { signIn } = useContext(AuthContext);
+
+  const [username, setUsername] = useState<string>(null);
+  const [password, setPassword] = useState<string>(null);
+
+  const clearInputs = () => {
+    setUsername(null);
+    setPassword(null);
+  };
+
   const onSignIn = async () => {
-    await login();
+    try {
+      await signIn(username, password);
+    } catch (error) {
+      Alert.alert("Error", error.message);
+      clearInputs();
+    }
+  };
+  const onForgotPassword = async () => {
+    navigation.navigate("ForgotPassword");
+  };
+  const onSignUp = async () => {
+    navigation.navigate("SignUp");
   };
   return (
-    <View>
-      <Text>Sign In Screen</Text>
-      <Button onPress={onSignIn}>Sign In</Button>
-    </View>
+    <Container>
+      <View
+        style={{
+          flex: 1,
+          marginHorizontal: 24,
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <Card style={{ width: "90%", padding: 16 }}>
+          <TextInput
+            label="Username"
+            placeholder="username"
+            value={username}
+            onChange={setInput(setUsername)}
+          />
+          <TextInput
+            label="Password"
+            placeholder="password"
+            value={password}
+            onChange={setInput(setPassword)}
+            secureTextEntry
+          />
+          <Margin margin="xlarge" />
+          <Button mode="contained" onPress={onSignIn}>
+            Sign In
+          </Button>
+          <Margin />
+          <Button onPress={onSignUp}>Sign Up</Button>
+          <Button onPress={onForgotPassword}>Forgot Password?</Button>
+        </Card>
+      </View>
+    </Container>
   );
 };
 
