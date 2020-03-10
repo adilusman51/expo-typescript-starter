@@ -48,8 +48,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         await AsyncStorage.setItem(KEY_AUTH, JSON.stringify(fakeAuth));
         setAuth(fakeAuth);
       }
+    } else {
+      throw Error("Incorrect username or password");
     }
-    throw Error("Incorrect username or password");
   };
   const signUp = async (username: string, password: string) => {
     const newUser = {
