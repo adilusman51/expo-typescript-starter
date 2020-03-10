@@ -11,17 +11,17 @@ import { Route } from "@react-navigation/native";
 import { Scene } from "@react-navigation/stack/lib/typescript/src/types";
 import { FlatHeader } from "../paper/FlatHeader";
 
-interface MainHeaderProps {
+interface TitleHeaderProps {
   scene: Scene<Route<string>>;
   previous: Scene<Route<string>>;
   navigation: StackNavigationProp<Record<string, object>, string>;
 }
 
-export const MainHeader = ({
+export const TitleHeader = ({
   scene,
   previous,
   navigation
-}: MainHeaderProps) => {
+}: TitleHeaderProps) => {
   const paperTheme = useTheme();
   const { options } = scene.descriptor;
   const title =
@@ -33,34 +33,13 @@ export const MainHeader = ({
 
   return (
     <FlatHeader>
-      {previous ? (
+      {previous && (
         <PaperAppbar.BackAction
           onPress={() => {
             navigation.goBack();
           }}
           color={paperTheme.colors.primary}
         />
-      ) : (
-        <TouchableOpacity
-          style={{ paddingLeft: 16 }}
-          onPress={() => {
-            // navigation.openDrawer();
-          }}
-        >
-          {/* <Avatar.Image
-            size={32}
-            source={{
-              uri:
-                "https://pbs.twimg.com/profile_images/952545910990495744/b59hSXUd_400x400.jpg"
-            }}
-          /> */}
-          <PaperAvatar.Icon
-            size={32}
-            icon={"menu"}
-            color={paperTheme.colors.primary}
-            style={{ backgroundColor: paperTheme.colors.surface }}
-          />
-        </TouchableOpacity>
       )}
       <PaperAppbar.Content
         // title={
