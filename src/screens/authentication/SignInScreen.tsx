@@ -5,7 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { AuthNavProps } from "../../navigation/params/AuthParamList";
 
 const SignInScreen = ({ navigation }: AuthNavProps<"SignIn">) => {
-  const { login } = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
   const onSignIn = async () => {
     await login();
   };

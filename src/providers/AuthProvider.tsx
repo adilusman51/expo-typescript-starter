@@ -7,18 +7,23 @@ type Auth = null | {
   accessToken: string;
   refreshToken: string;
   tokenType: string;
+  expiresIn: number;
 };
 
 type AuthContextType = {
   auth: Auth;
-  login: () => void;
+  signIn: (username: string, password: string) => void;
+  signUp: (username: string, password: string) => void;
+  forgotPassword: (username: string) => void;
   logout: () => void;
   checkAuth: () => Promise<boolean>;
 };
 
 const DefaultContext: AuthContextType = {
   auth: null,
-  login: () => {},
+  signIn: () => {},
+  signUp: () => {},
+  forgotPassword: () => {},
   logout: () => {},
   checkAuth: () => null
 };
@@ -29,15 +34,44 @@ interface AuthProviderProps {}
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [auth, setAuth] = useState<Auth>(null);
-  const login = async () => {
-    const fakeAuth: Auth = {
-      accessToken: "",
-      refreshToken: "",
-      tokenType: "bearer"
-    };
-    await AsyncStorage.setItem(KEY_AUTH, JSON.stringify(fakeAuth));
-    setAuth(fakeAuth);
+  const signIn = async (username: string, password: string) => {
+    const userString = await AsyncStorage.getItem(username.toLocaleLowerCase());
+    if (userString) {
+      const user = JSON.parse(userString);
+      if (user.password === password) {
+        const fakeAuth: Auth = {
+          accessToken: "",
+          refreshToken: "",
+          tokenType: "bearer",
+          expiresIn: 60 * 60 * 1
+        };
+        await AsyncStorage.setItem(KEY_AUTH, JSON.stringify(fakeAuth));
+        setAuth(fakeAuth);
+      }
+    }
+    throw Error("Incorrect username or password");
   };
+  const signUp = async (username: string, password: string) => {
+    const newUser = {
+      username: username.toLocaleLowerCase(),
+      password
+    };
+    await AsyncStorage.setItem(newUser.username, JSON.stringify(newUser));
+  };
+
+  const forgotPassword = async (username: string) => {
+    const userString = await AsyncStorage.getItem(username.toLocaleLowerCase());
+    if (userString) {
+      const oldUser = JSON.parse(userString);
+      const newUser = {
+        username: oldUser.username.toLocaleLowerCase(),
+        password: "123456"
+      };
+      await AsyncStorage.setItem(newUser.username, JSON.stringify(newUser));
+    }
+    throw Error("Username does not exits");
+  };
+
   const logout = async () => {
     await AsyncStorage.removeItem(KEY_AUTH);
     setAuth(null);
@@ -54,7 +88,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
   return (
-    <AuthContext.Provider value={{ auth, login, logout, checkAuth }}>
+    <AuthContext.Provider
+      value={{ auth, signIn, signUp, forgotPassword, logout, checkAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );
