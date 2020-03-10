@@ -5,6 +5,7 @@ import SignUpScreen from "../screens/authentication/SignUpScreen";
 import ForgotPasswordScreen from "../screens/authentication/ForgotPasswordScreen";
 import { LocalizationContext } from "../providers/LocalizationProvider";
 import { AuthParamList } from "./params/AuthParamList";
+import { TitleHeader } from "../components/TitleHeader";
 
 interface AuthStackProps {}
 
@@ -14,7 +15,17 @@ export const AuthStack: React.FC<AuthStackProps> = ({}) => {
   const { t } = React.useContext(LocalizationContext);
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        header: ({ scene, previous, navigation }) => (
+          <TitleHeader
+            scene={scene}
+            previous={previous}
+            navigation={navigation}
+          />
+        )
+      }}
+    >
       <Stack.Screen
         name="SignIn"
         component={SignInScreen}
