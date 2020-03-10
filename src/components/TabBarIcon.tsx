@@ -2,8 +2,6 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { withTheme } from "react-native-paper";
 
-import Colors from "../constants/Colors";
-
 function TabBarIcon(props) {
   const { colors } = props.theme;
   return (
