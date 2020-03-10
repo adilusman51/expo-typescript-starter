@@ -5,8 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthContext } from "../providers/AuthProvider";
 import { AppStack } from "./AppStack";
 import { AuthStack } from "./AuthStack";
-import { View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import { LoadingScreen } from "../components/LoadingScreen";
 
 interface AppNavigatorProps {}
 
@@ -21,14 +20,8 @@ export const AppNavigator: React.FC<AppNavigatorProps> = ({}) => {
   }, []);
 
   if (loading) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
+    <LoadingScreen />;
   }
-
-  console.log("Auth: ", auth);
 
   return (
     <NavigationContainer>
