@@ -1,15 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
-import {
-	Appbar,
-	Avatar,
-	Button,
-	Card,
-	FAB,
-	Searchbar,
-	withTheme,
-} from 'react-native-paper';
-import { LocalizationContext, AuthContext } from '@providers';
+import { Button, withTheme } from 'react-native-paper';
+import { LocalizationContext, AuthContext, ThemeContext } from '@providers';
 
 import { SettingsNavProps } from '@navigation';
 
@@ -21,15 +13,21 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({
 }: SettingsNavProps<'Settings'>) => {
 	const { locale, t, updateLocale } = React.useContext(LocalizationContext);
 	const { logout } = useContext(AuthContext);
+	const { themeMode, switchTheme } = useContext(ThemeContext);
 
 	const changeLocalization = () => {
 		updateLocale(locale == 'en' ? 'cn' : 'en');
+	};
+
+	const changeTheme = () => {
+		switchTheme(themeMode == 'dark' ? 'light' : 'dark');
 	};
 
 	return (
 		<View style={{ flex: 1, backgroundColor: theme.colors.surface }}>
 			<View style={{ flex: 1, marginHorizontal: 24 }}>
 				<View style={{ flex: 1 }} />
+				<Button onPress={changeTheme}>Change Theme</Button>
 				<Button onPress={changeLocalization}>
 					Change Localization
 				</Button>

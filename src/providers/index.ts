@@ -4,11 +4,14 @@ import {
 	LocalizationProvider,
 } from './LocalizationProvider';
 import Providers from './Providers';
+import { ThemeProvider, ThemeContext } from './ThemeProvider';
 
 export {
 	AuthProvider,
 	AuthContext,
 	LocalizationContext,
 	LocalizationProvider,
+	ThemeContext,
+	ThemeProvider,
 	Providers,
 };
