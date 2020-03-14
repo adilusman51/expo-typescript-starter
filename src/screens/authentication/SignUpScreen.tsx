@@ -1,8 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Alert } from 'react-native';
-import { Button } from 'react-native-paper';
 
-import { Container, Card, TextInput } from '@paper';
+import { Container, Card, TextInput, Button } from '@paper';
 import { AuthNavProps } from '@navigation';
 import { AuthContext } from '@providers';
 import { Margin } from '@components';
