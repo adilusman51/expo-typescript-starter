@@ -20,6 +20,7 @@ export const AppStack: React.FC<AppStackProps> = ({}) => {
 
 	return (
 		<Tab.Navigator
+			backBehavior='initialRoute'
 			screenOptions={({ route }) => ({
 				tabBarIcon: ({ focused, color, size }) => {
 					let iconName;
