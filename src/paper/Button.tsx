@@ -1,26 +1,21 @@
-import React from "react";
-import { Button as PaperButton } from "react-native-paper";
+import React from 'react';
+import { Button as PaperButton } from 'react-native-paper';
 
 type PaperButtonProps = React.ComponentProps<typeof PaperButton>;
 
-export type ButtonProps = PaperButtonProps & { elevation?: number };
+export type ButtonProps = PaperButtonProps;
 
 export const Button: React.FC<ButtonProps> = ({
-  children,
-  elevation,
-  style,
-  theme,
-  ...rest
+	children,
+	style,
+	theme,
+	...rest
 }) => {
-  return (
-    <PaperButton
-      {...rest}
-      style={[{ elevation: 4 }, elevation && { elevation }, style]}
-      theme={theme}
-    >
-      {children}
-    </PaperButton>
-  );
+	return (
+		<PaperButton style={[style]} theme={theme} {...rest}>
+			{children}
+		</PaperButton>
+	);
 };
 
 export default Button;
