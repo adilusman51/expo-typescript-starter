@@ -5,13 +5,13 @@ import { AppTheme } from '../constants/Theme';
 import { LocalizationProvider } from './LocalizationProvider';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as ReduxProvider } from 'react-redux';
-import store from '../redux/stores';
+import { reduxStore } from '@redux-store';
 
 interface ProvidersProps {}
 
 export const Providers: React.FC<ProvidersProps> = ({ children }) => {
 	return (
-		<ReduxProvider store={store}>
+		<ReduxProvider store={reduxStore}>
 			<AuthProvider>
 				<LocalizationProvider>
 					<SafeAreaProvider>
@@ -24,3 +24,5 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
 		</ReduxProvider>
 	);
 };
+
+export default Providers;

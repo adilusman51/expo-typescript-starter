@@ -1,11 +1,23 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react-native",
-    "lib": ["dom", "esnext"],
-    "moduleResolution": "node",
-    "noEmit": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true
-  }
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react-native",
+		"lib": ["dom", "esnext"],
+		"moduleResolution": "node",
+		"noEmit": true,
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"baseUrl": "./src",
+		"paths": {
+			"*": ["src/*"],
+			"@screens": ["./screens"],
+			"@components": ["./components"],
+			"@paper": ["./paper"],
+			"@providers": ["./providers"],
+			"@navigation": ["./navigation"],
+			"@utils": ["./utils"],
+			"@redux-store": ["./redux/stores"],
+			"@localization": ["../localization"]
+		}
+	}
 }

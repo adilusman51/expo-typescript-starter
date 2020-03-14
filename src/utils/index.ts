@@ -1,0 +1,1 @@
+export { setInput } from './InputHelper';
