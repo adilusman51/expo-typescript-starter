@@ -1,28 +1,28 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
 
-export type ThemeMode = 'light' | 'dark';
+export declare type ThemeMode = 'light' | 'dark';
 
-const DEFAULT_THEME: string = 'light';
+const DEFAULT_THEME: ThemeMode = 'light';
 
 export const ThemeContext = React.createContext<{
-	themeMode: string;
-	switchTheme: (newTheme: string) => void;
+	themeMode: ThemeMode;
+	switchTheme: (newTheme: ThemeMode) => void;
 }>({ themeMode: DEFAULT_THEME, switchTheme: () => {} });
 
 interface ThemeProviderProps {}
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-	const [themeMode, setThemeMode] = React.useState<string>(DEFAULT_THEME);
+	const [themeMode, setThemeMode] = React.useState<ThemeMode>(DEFAULT_THEME);
 
 	const loadTheme = async () => {
 		const savedThemeMode =
 			(await AsyncStorage.getItem('@KEY_THEME')) || DEFAULT_THEME;
 
-		setThemeMode(savedThemeMode as string);
+		setThemeMode(savedThemeMode as ThemeMode);
 	};
 
-	const switchTheme = async (newThemeMode: string) => {
+	const switchTheme = async (newThemeMode: ThemeMode) => {
 		await AsyncStorage.setItem('@KEY_THEME', newThemeMode);
 		setThemeMode(newThemeMode);
 	};

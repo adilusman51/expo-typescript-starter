@@ -4,16 +4,18 @@ import i18n from 'i18n-js';
 
 import { en, cn } from '@localization';
 
-const DEFAULT_LOCALE = 'en';
+export declare type Languages = 'en' | 'cn';
+
+const DEFAULT_LOCALE: Languages = 'en';
 
 i18n.fallbacks = true;
 i18n.translations = { en, cn };
-i18n.locale = DEFAULT_LOCALE;
+i18n.locale = DEFAULT_LOCALE as string;
 
 export const LocalizationContext = React.createContext<{
-	locale: string;
+	locale: Languages;
 	t: (scope: any, options?: any) => string;
-	updateLocale: (newLocale: string) => void;
+	updateLocale: (newLocale: Languages) => void;
 }>({ locale: DEFAULT_LOCALE, t: () => null, updateLocale: () => {} });
 
 interface LocalizationProviderProps {}
@@ -21,19 +23,19 @@ interface LocalizationProviderProps {}
 export const LocalizationProvider: React.FC<LocalizationProviderProps> = ({
 	children,
 }) => {
-	const [locale, setLocale] = React.useState(DEFAULT_LOCALE);
+	const [locale, setLocale] = React.useState<Languages>(DEFAULT_LOCALE);
 
 	const loadLocalization = async () => {
 		const savedLocale =
-			(await AsyncStorage.getItem('localization')) || DEFAULT_LOCALE;
+			(await AsyncStorage.getItem('@KEY_LOCALIZATION')) || DEFAULT_LOCALE;
 
-		i18n.locale = savedLocale;
-		setLocale(savedLocale);
+		i18n.locale = savedLocale as string;
+		setLocale(savedLocale as Languages);
 	};
 
-	const updateLocale = async newLocale => {
-		await AsyncStorage.setItem('localization', newLocale);
-		i18n.locale = newLocale;
+	const updateLocale = async (newLocale: Languages) => {
+		await AsyncStorage.setItem('@KEY_LOCALIZATION', newLocale);
+		i18n.locale = newLocale as string;
 		setLocale(newLocale);
 	};
 	const translate = (scope, options) => i18n.t(scope, { locale, ...options });
