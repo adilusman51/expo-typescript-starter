@@ -42,6 +42,7 @@ export const TitleHeader = ({
 				// }
 				title={title}
 				color={paperTheme.colors.primary}
+				titleStyle={{ alignSelf: 'center', textAlign: 'center' }}
 			/>
 		</FlatHeader>
 	);
