@@ -39,6 +39,8 @@ export const AppStack: React.FC<AppStackProps> = ({}) => {
 				},
 			})}
 			tabBarOptions={{
+				style: { backgroundColor: paperTheme.colors.surface },
+				tabStyle: { backgroundColor: paperTheme.colors.surface },
 				activeTintColor: paperTheme.colors.primary,
 				inactiveTintColor: paperTheme.colors.disabled,
 			}}
