@@ -6,9 +6,9 @@ import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
-import AppNavigator from './src/navigation/AppNavigator';
+import { AppNavigator } from '@navigation';
 
-import { Providers } from './src/providers/Providers';
+import { Providers } from '@providers';
 
 export default function App(props) {
 	const [isLoadingComplete, setLoadingComplete] = useState(false);
