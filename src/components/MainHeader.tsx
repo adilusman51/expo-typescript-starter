@@ -4,7 +4,7 @@ import {
 	Avatar as PaperAvatar,
 	Appbar as PaperAppbar,
 } from 'react-native-paper';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Platform } from 'react-native';
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Route } from '@react-navigation/native';
@@ -30,7 +30,9 @@ export const MainHeader = ({
 			: options.title !== undefined
 			? options.title
 			: scene.route.name;
-
+	const paddingHorizontal = 16;
+	const iconSize = 32;
+	const marginHorizontal = paddingHorizontal + iconSize;
 	return (
 		<FlatHeader>
 			{previous ? (
@@ -42,7 +44,7 @@ export const MainHeader = ({
 				/>
 			) : (
 				<TouchableOpacity
-					style={{ paddingLeft: 16 }}
+					style={{ paddingLeft: paddingHorizontal }}
 					onPress={() => {
 						// navigation.openDrawer();
 					}}
@@ -55,7 +57,7 @@ export const MainHeader = ({
             }}
           /> */}
 					<PaperAvatar.Icon
-						size={32}
+						size={iconSize}
 						icon={'menu'}
 						color={paperTheme.colors.primary}
 						style={{ backgroundColor: paperTheme.colors.surface }}
@@ -68,6 +70,12 @@ export const MainHeader = ({
 				// }
 				title={title}
 				color={paperTheme.colors.primary}
+				titleStyle={{ alignSelf: 'center', textAlign: 'center' }}
+				style={
+					Platform.OS == 'android' && {
+						marginRight: marginHorizontal,
+					}
+				}
 			/>
 		</FlatHeader>
 	);
