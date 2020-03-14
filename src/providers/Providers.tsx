@@ -10,11 +10,18 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as ReduxProvider } from 'react-redux';
 import { reduxStore } from '@redux-store';
 
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+
+const CombinedDefaultTheme = { ...DefaultTheme, ...AppThemeLight };
+const CombinedDarkTheme = { ...DarkTheme, ...AppThemeDark };
+
 const ThemedApp = ({ children }) => {
 	const { themeMode } = useContext(ThemeContext);
 	return (
 		<PaperProvider
-			theme={themeMode === 'light' ? AppThemeLight : AppThemeDark}
+			theme={
+				themeMode === 'light' ? CombinedDefaultTheme : CombinedDarkTheme
+			}
 		>
 			<View style={styles.container}>
 				{Platform.OS === 'ios' && (
