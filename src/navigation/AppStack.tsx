@@ -43,6 +43,7 @@ export const AppStack: React.FC<AppStackProps> = ({}) => {
 				tabStyle: { backgroundColor: paperTheme.colors.surface },
 				activeTintColor: paperTheme.colors.primary,
 				inactiveTintColor: paperTheme.colors.disabled,
+				labelStyle: { fontFamily: paperTheme.fonts.regular.fontFamily },
 			}}
 		>
 			<Tab.Screen
