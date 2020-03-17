@@ -5,7 +5,7 @@ import { AuthProvider } from './AuthProvider';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppThemeLight, AppThemeDark } from '../constants/Theme';
 import { LocalizationProvider } from './LocalizationProvider';
-import { ThemeProvider, ThemeContext, ThemeMode } from './ThemeProvider';
+import { ThemeProvider, ThemeContext } from './ThemeProvider';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as ReduxProvider } from 'react-redux';
 import { reduxStore } from '@redux-store';
