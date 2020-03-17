@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 
-import { AppLoading } from 'expo';
+import { AppLoading, Updates } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -12,6 +12,37 @@ import { Providers } from '@providers';
 
 export default function App(props) {
 	const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+	const checkForUpdates = async () => {
+		try {
+			const update = await Updates.checkForUpdateAsync();
+			if (update.isAvailable) {
+				await Updates.fetchUpdateAsync();
+				// ... notify user of update ...
+				Alert.alert(
+					'App Update',
+					'New version of this App is available.',
+					[
+						{
+							text: 'Reload',
+							onPress: () => Updates.reloadFromCache(),
+						},
+					],
+					{ cancelable: false }
+				);
+			}
+		} catch (e) {
+			// handle or log error
+			console.log(e);
+		}
+	};
+
+	useEffect(() => {
+		checkForUpdates();
+		// return () => {
+		// 	cleanup
+		// }
+	}, []);
 
 	if (!isLoadingComplete && !props.skipLoadingScreen) {
 		return (
