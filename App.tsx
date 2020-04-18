@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 
-import { AppLoading, Updates } from 'expo';
+import { AppLoading } from 'expo';
+import * as Updates from 'expo-updates';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -25,7 +26,7 @@ export default function App(props) {
 					[
 						{
 							text: 'Reload',
-							onPress: () => Updates.reloadFromCache(),
+							onPress: () => Updates.reloadAsync(),
 						},
 					],
 					{ cancelable: false }
@@ -38,6 +39,7 @@ export default function App(props) {
 	};
 
 	useEffect(() => {
+		if (__DEV__) return;
 		checkForUpdates();
 		// return () => {
 		// 	cleanup

@@ -42,7 +42,7 @@ export const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
 					}}
 				>
 					<Image
-						source={require('assets/images/logo.png')}
+						source={require('assets/icon.png')}
 						style={{ width: 64, height: 64, overflow: 'hidden' }}
 					/>
 				</View>

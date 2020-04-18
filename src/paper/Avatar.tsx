@@ -39,7 +39,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 	} else {
 		return (
 			<PaperAvatar.Image
-				source={require('assets/images/avatar.png')}
+				source={require('assets/icon.png')}
 				style={[style, { backgroundColor: 'transparent' }]}
 				theme={theme}
 				{...rest}

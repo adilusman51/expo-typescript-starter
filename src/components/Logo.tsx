@@ -9,7 +9,7 @@ export const Logo: React.FC<LogoProps> = ({ size = 48 }) => {
 	return (
 		<View style={{ overflow: 'hidden' }}>
 			<Image
-				source={require('assets/images/logo.png')}
+				source={require('assets/icon.png')}
 				style={{ width: size, height: size, overflow: 'hidden' }}
 			/>
 		</View>
