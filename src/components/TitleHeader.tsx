@@ -26,16 +26,19 @@ export const TitleHeader = ({
 			? options.title
 			: scene.route.name;
 
+	const { headerRight, headerLeft } = options;
 	return (
 		<FlatHeader>
-			{previous && (
+			{previous ? (
 				<PaperAppbar.BackAction
 					onPress={() => {
 						navigation.goBack();
 					}}
 					color={paperTheme.colors.primary}
 				/>
-			)}
+			) : headerLeft ? (
+				headerLeft({ tintColor: paperTheme.colors.primary })
+			) : null}
 			<PaperAppbar.Content
 				// title={
 				//   previous ? title : <MaterialCommunityIcons name="twitter" size={40} />
@@ -44,6 +47,8 @@ export const TitleHeader = ({
 				color={paperTheme.colors.primary}
 				titleStyle={{ alignSelf: 'center', textAlign: 'center' }}
 			/>
+			{headerRight &&
+				headerRight({ tintColor: paperTheme.colors.primary })}
 		</FlatHeader>
 	);
 };
