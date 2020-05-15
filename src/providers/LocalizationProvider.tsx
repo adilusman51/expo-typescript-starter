@@ -2,7 +2,7 @@ import React from 'react';
 import { AsyncStorage } from 'react-native';
 import i18n from 'i18n-js';
 
-import { en, cn } from '@localization';
+import { en, cn, Translation } from '@localization';
 
 export declare type Languages = 'en' | 'cn';
 
@@ -14,7 +14,7 @@ i18n.locale = DEFAULT_LOCALE as string;
 
 export const LocalizationContext = React.createContext<{
 	locale: Languages;
-	t: (scope: any, options?: any) => string;
+	t: (scope: Translation, options?: any) => string;
 	updateLocale: (newLocale: Languages) => void;
 }>({ locale: DEFAULT_LOCALE, t: () => null, updateLocale: () => {} });
 
